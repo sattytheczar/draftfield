@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  />
+  <title>Idea Shelf</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Konva (canvas engine) -->
+  <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+
+  <!-- Dexie (IndexedDB wrapper) -->
+  <script src="https://unpkg.com/dexie@4/dist/dexie.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Idea Shelf</div>
+
+    <div class="topbar-actions" id="topbarActions">
+      <!-- buttons injected -->
+    </div>
+  </header>
+
+  <div id="banner" class="banner hidden">
+    <div class="banner-text">Backup ready — it’s been a day since your last save.</div>
+    <button id="bannerSave" class="btn btn-primary">Save backup</button>
+    <button id="bannerDismiss" class="btn">Not now</button>
+  </div>
+
+  <!-- Bookshelf screen -->
+  <main id="bookshelfScreen" class="screen">
+    <div class="screen-header">
+      <h1>Bookshelf</h1>
+      <div class="row">
+        <button id="addBookBtn" class="btn btn-primary">Add book</button>
+        <button id="exportBtn" class="btn">Export backup</button>
+        <label class="btn file-btn">
+          Import backup
+          <input id="importFile" type="file" accept="application/json" />
+        </label>
+      </div>
+    </div>
+
+    <div id="shelves" class="shelves"></div>
+  </main>
+
+  <!-- Canvas screen -->
+  <main id="canvasScreen" class="screen hidden">
+    <div class="canvas-header">
+      <button id="backBtn" class="btn">← Back</button>
+      <div class="canvas-title" id="canvasTitle"></div>
+      <div class="canvas-header-right">
+        <button id="renameBookBtn" class="btn">Rename</button>
+        <button id="deleteBookBtn" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+
+    <div id="stageWrap" class="stage-wrap"></div>
+
+    <div class="hint">
+      Double-tap empty space: new node · Tap node: select · Drag selected: move · Pinch: zoom · Drag background: pan
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
