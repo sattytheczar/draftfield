@@ -140,6 +140,7 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   background: linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.55));
   filter: blur(0.2px);
   opacity: 0.85;}
+}
 
 .spines {
   display: flex;
