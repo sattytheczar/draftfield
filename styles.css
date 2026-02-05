@@ -1,18 +1,22 @@
 :root {
-  --bg1: #0b0b0e;
-  --bg2: #1a120c;
-  --paper: #111318;
-  --wood1: #6b3f1c;
-  --wood2: #3a220f;
-  --text: #f1f1f1;
-  --muted: #b9b9b9;
+  --bg1: #07060a;
+  --bg2: #120a18;
+  --paper: #0f1116;
+  --wood1: #2b1b12;
+  --wood2: #140c08;
+  --text: #f2f1f7;
+  --muted: #b9b6c8;
 }
 
 * { box-sizing: border-box; }
 html, body {
   margin: 0;
   height: 100%;
-  background: radial-gradient(1200px 800px at 30% 20%, var(--bg2), var(--bg1));
+  background:
+    radial-gradient(900px 600px at 18% 18%, rgba(120, 60, 180, 0.18), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 600px at 78% 30%, rgba(20, 120, 95, 0.14), rgba(0,0,0,0) 55%),
+    radial-gradient(1200px 900px at 50% 85%, rgba(180, 110, 40, 0.10), rgba(0,0,0,0) 65%),
+    linear-gradient(180deg, var(--bg1), #0b0b12 55%, #07060a);
   color: var(--text);
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
   overscroll-behavior: none;
@@ -93,27 +97,18 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   border-radius: 8px;
 
   background:
-    /* big grain bands (very visible) */
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.35)),
     repeating-linear-gradient(
       90deg,
-      rgba(0,0,0,0.35) 0px,
-      rgba(0,0,0,0.35) 5px,
-      rgba(255,255,255,0.06) 5px,
-      rgba(255,255,255,0.06) 11px
+      rgba(0,0,0,0.16) 0px,
+      rgba(0,0,0,0.16) 6px,
+      rgba(255,255,255,0.03) 6px,
+      rgba(255,255,255,0.03) 12px
     ),
-    /* fine grain */
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,0,0,0.18) 0px,
-      rgba(0,0,0,0.18) 2px,
-      rgba(255,255,255,0.03) 2px,
-      rgba(255,255,255,0.03) 4px
-    ),
-    /* wood tone */
-    linear-gradient(180deg, #3b2718, #1e130c);
+    linear-gradient(180deg, var(--wood1), var(--wood2));
 
-  box-shadow: 0 10px 18px rgba(0,0,0,0.60);
-  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.65);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .spines {
@@ -132,7 +127,7 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   position: relative;
   flex: 0 0 auto;
   box-shadow: 0 12px 18px rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,11 +152,17 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 .spine::after {
   content: "";
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 14px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.18), rgba(255,255,255,0.00));
-  opacity: 0.55;
+  inset: 0;
+  border-radius: 6px;
+
+  background:
+    /* worn edges */
+    linear-gradient(90deg, rgba(255,255,255,0.16), rgba(255,255,255,0.00) 26%),
+    linear-gradient(-90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.00) 32%),
+    /* faint mottling */
+    radial-gradient(120px 180px at 40% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0) 60%);
   pointer-events: none;
+  opacity: 0.75;
 }
 
 .spine-title {
