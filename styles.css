@@ -81,7 +81,7 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 .shelf {
   position: relative;
   padding: 18px 12px 22px;
-  border-radius: 16px;
+  border-radius: 10px;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
   border: 1px solid rgba(255,255,255,0.08);
 }
@@ -90,10 +90,25 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   position: absolute;
   left: 10px; right: 10px; bottom: 10px;
   height: 30px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, var(--wood1), var(--wood2));
+  border-radius: 8px;
+
+  /* Wood base + grain layers */
+  background:
+    /* subtle highlights/shadows */
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.22)),
+    /* long wood bands */
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.10) 0px,
+      rgba(0,0,0,0.10) 6px,
+      rgba(255,255,255,0.03) 6px,
+      rgba(255,255,255,0.03) 10px
+    ),
+    /* warm wood color */
+    linear-gradient(180deg, #6b3f1c, #3a220f);
+
   box-shadow: 0 10px 18px rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.10); 
 }
 
 .spines {
@@ -108,7 +123,7 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 .spine {
   width: 56px;
   height: 190px;
-  border-radius: 14px;
+  border-radius: 6px;
   position: relative;
   flex: 0 0 auto;
   box-shadow: 0 12px 18px rgba(0,0,0,0.55);
@@ -118,15 +133,30 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   justify-content: center;
   padding: 10px;
   user-select: none;
+
+  /* add subtle vertical “cloth/paper” texture */
+  background-blend-mode: overlay;
 }
 
+/* dark groove near the spine edge */
 .spine::before {
   content: "";
   position: absolute;
-  left: 8px; top: 8px; bottom: 8px;
-  width: 10px;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.18);
+  left: 6px; top: 8px; bottom: 8px;
+  width: 8px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.22);
+}
+
+/* sheen highlight */
+.spine::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.18), rgba(255,255,255,0.00));
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 .spine-title {
@@ -157,11 +187,23 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 
 .stage-wrap {
   height: calc(100vh - 52px - 52px - 54px);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.10);
-  background: radial-gradient(900px 600px at 40% 30%, rgba(255,255,255,0.04), rgba(0,0,0,0.40));
-  touch-action: none; /* important: prevent browser gesture interference */
+
+  /* Paper-ish background + faint texture */
+  background:
+    radial-gradient(900px 600px at 40% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0.45)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 2px,
+      rgba(0,0,0,0.00) 2px,
+      rgba(0,0,0,0.00) 6px
+    ),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.20));
+
+  touch-action: none;
 }
 
 .hint {
