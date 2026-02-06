@@ -1,5 +1,4 @@
 :root {
-  
   --bg1: #07060a;
   --bg2: #120a18;
   --paper: #0f1116;
@@ -7,18 +6,31 @@
   --wood2: #140c08;
   --text: #f2f1f7;
   --muted: #b9b6c8;
-  --pixel-border: 2px;
-  --pixel-shadow: 2px;
+
+  /* Pixel ruler */
   --px: 2px;
   --border: 2px;
   --shadow: 2px;
+
+  /* JRPG panel vibe */
+  --panel-edge: rgba(216, 208, 255, 0.85);
+  --panel-inset1: rgba(255,255,255,0.14);
+  --panel-inset2: rgba(0,0,0,0.55);
+  --panel-fill: rgba(10, 10, 18, 0.50);
+
+  --btn-fill: rgba(255,255,255,0.08);
+  --btn-fill-primary: rgba(90,160,255,0.22);
+  --btn-fill-danger: rgba(255,90,90,0.16);
 }
 
 * { box-sizing: border-box; }
+
+/* Step 4: typography + scale that feels “menu-like” */
 html, body {
   margin: 0;
   height: 100%;
   background:
+    /* low-fi dither */
     repeating-linear-gradient(
       45deg,
       rgba(255,255,255,0.03) 0px,
@@ -29,106 +41,162 @@ html, body {
     radial-gradient(800px 500px at 25% 20%, rgba(120, 60, 180, 0.22), rgba(0,0,0,0) 60%),
     radial-gradient(900px 600px at 75% 35%, rgba(20, 120, 95, 0.18), rgba(0,0,0,0) 55%),
     linear-gradient(180deg, #05040a, #0a0812 55%, #05040a);
-  color: #f2f1f7;
+  color: var(--text);
+
+  /* Font stack that doesn’t require assets */
   font-family: ui-monospace, Menlo, Monaco, "Courier New", monospace;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+
   overscroll-behavior: none;
 }
 
+/* ---- Top bar ---- */
 .topbar {
   height: 52px;
   display: flex;
   align-items: center;
-  padding: 0 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(8px);
-}
-.brand { font-weight: 700; letter-spacing: 0.3px; }
-.topbar-actions { margin-left: auto; display: flex; gap: 8px; }
+  padding: 0 calc(var(--px) * 6);
+  border: none;
+  backdrop-filter: none;
 
-.screen { padding: 14px; }
+  background: var(--panel-fill);
+  border-bottom: var(--border) solid rgba(255,255,255,0.10);
+  box-shadow: var(--shadow) var(--shadow) 0 rgba(0,0,0,0.55);
+}
+.brand { font-weight: 900; letter-spacing: 0.8px; }
+.topbar-actions { margin-left: auto; display: flex; gap: calc(var(--px) * 3); }
+
+/* ---- Layout ---- */
+.screen { padding: calc(var(--px) * 6); }
 .hidden { display: none !important; }
 
 .screen-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 10px;
+  gap: calc(var(--px) * 5);
 }
-h1 { margin: 8px 0 10px; font-size: 22px; }
-.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
+h1 {
+  margin: calc(var(--px) * 3) 0 calc(var(--px) * 4);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.row { display: flex; gap: calc(var(--px) * 4); align-items: center; flex-wrap: wrap; }
+
+/* ---- Buttons (JRPG menu buttons) ---- */
 .btn {
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.08);
+  border: var(--border) solid rgba(255,255,255,0.18);
+  background: var(--btn-fill);
   color: var(--text);
-  padding: 10px 12px;
-  border-radius: 0px !important;
-  font-weight: 600;
+  padding: calc(var(--px) * 4) calc(var(--px) * 5);
+  border-radius: 0;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+
+  box-shadow:
+    inset var(--border) var(--border) 0 rgba(255,255,255,0.10),
+    inset calc(var(--border) * -1) calc(var(--border) * -1) 0 rgba(0,0,0,0.55),
+    var(--shadow) var(--shadow) 0 rgba(0,0,0,0.75);
 }
 .btn:active { transform: translateY(1px); }
-.btn-primary { background: rgba(90,160,255,0.25); border-color: rgba(90,160,255,0.35); }
-.btn-danger { background: rgba(255,90,90,0.18); border-color: rgba(255,90,90,0.30); }
 
-.file-btn input { display:none; }
+.btn-primary {
+  background: var(--btn-fill-primary);
+  border-color: rgba(140,190,255,0.40);
+}
+.btn-danger {
+  background: var(--btn-fill-danger);
+  border-color: rgba(255,120,120,0.35);
+}
 
+.file-btn input { display: none; }
+
+/* ---- Backup banner ---- */
 .banner {
   position: sticky;
   top: 52px;
   z-index: 5;
   display: flex;
-  gap: 10px;
+  gap: calc(var(--px) * 4);
   align-items: center;
   justify-content: space-between;
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  background: rgba(25, 40, 25, 0.55);
-  backdrop-filter: blur(8px);
-}
-.banner-text { color: #e8ffe8; font-weight: 650; }
+  padding: calc(var(--px) * 4) calc(var(--px) * 5);
 
+  border-top: var(--border) solid rgba(255,255,255,0.10);
+  border-bottom: var(--border) solid rgba(255,255,255,0.12);
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 4px,
+      rgba(0,0,0,0) 4px,
+      rgba(0,0,0,0) 8px
+    ),
+    rgba(20, 45, 25, 0.60);
+
+  box-shadow: var(--shadow) var(--shadow) 0 rgba(0,0,0,0.65);
+}
+.banner-text { color: #e8ffe8; font-weight: 900; letter-spacing: 0.3px; }
+
+/* ---- Shelves ---- */
 .shelves {
-  margin-top: 14px;
+  margin-top: calc(var(--px) * 6);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: calc(var(--px) * 7);
 }
 
 .shelf {
   position: relative;
-  padding: 18px 12px 22px;
-  border-radius: 0px !important;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
-  border: 1px solid rgba(255,255,255,0.08);
+  padding: calc(var(--px) * 7) calc(var(--px) * 6) calc(var(--px) * 9);
+  border-radius: 0;
+
+  background: rgba(0,0,0,0.18);
+  border: var(--border) solid rgba(255,255,255,0.10);
+  box-shadow: var(--shadow) var(--shadow) 0 rgba(0,0,0,0.70);
 }
 
+/* Shelf plank (fantasy “tile wood”, not barcode) */
 .plank {
   position: absolute;
-  left: 10px; right: 10px; bottom: 10px;
-  height: 30px;
+  left: calc(var(--px) * 5);
+  right: calc(var(--px) * 5);
+  bottom: calc(var(--px) * 5);
+  height: calc(var(--px) * 14);
 
   background:
-    /* dark tile pattern */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 2px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0) 4px
+    ),
     repeating-linear-gradient(
       90deg,
-      rgba(255,255,255,0.05) 0px,
-      rgba(255,255,255,0.05) 6px,
-      rgba(0,0,0,0) 6px,
-      rgba(0,0,0,0) 12px
+      rgba(0,0,0,0.16) 0px,
+      rgba(0,0,0,0.16) calc(var(--px) * 10),
+      rgba(255,255,255,0.03) calc(var(--px) * 10),
+      rgba(255,255,255,0.03) calc(var(--px) * 16)
     ),
-    linear-gradient(180deg, #2a1a12, #140c08);
+    linear-gradient(180deg, #2a190f, #140c08);
 
-  border: var(--pixel-border) solid rgba(255,255,255,0.14);
-  box-shadow:
-    var(--pixel-shadow) var(--pixel-shadow) 0 rgba(0,0,0,0.70);
+  border: var(--border) solid rgba(200, 176, 138, 0.55);
+  box-shadow: var(--shadow) var(--shadow) 0 rgba(0,0,0,0.80);
 }
 
+/* ---- Book spines ---- */
 .spines {
   display: flex;
-  gap: 10px;
+  gap: calc(var(--px) * 4);
   align-items: flex-end;
   overflow-x: auto;
-  padding-bottom: 12px;
+  padding-bottom: calc(var(--px) * 6);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -137,54 +205,66 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   height: 190px;
   position: relative;
   flex: 0 0 auto;
-  padding: 10px;
+  padding: calc(var(--px) * 4);
 
-  border: var(--pixel-border) solid rgba(255,255,255,0.16);
-  box-shadow: var(--pixel-shadow) var(--pixel-shadow) 0 rgba(0,0,0,0.70);
+  border: var(--border) solid rgba(255,255,255,0.18);
+  box-shadow: var(--shadow) var(--shadow) 0 rgba(0,0,0,0.75);
 }
 
 .spine::before {
   content: "";
   position: absolute;
-  inset: 6px;
-  border: 1px solid rgba(0,0,0,0.35);
+  inset: calc(var(--px) * 3);
+  border: 1px solid rgba(0,0,0,0.45);
   pointer-events: none;
 }
 
-.spine-title {
-  background: rgba(0,0,0,0.25);
-  padding: 6px 4px;
-  border: 1px solid rgba(255,255,255,0.12);
-  letter-spacing: 0.2px;
-  font-weight: 800;
+.spine::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--px) * 2);
+  top: calc(var(--px) * 2);
+  bottom: calc(var(--px) * 2);
+  width: calc(var(--px) * 3);
+  background: rgba(255,255,255,0.10);
+  pointer-events: none;
+  opacity: 0.55;
 }
 
 .spine-title {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-weight: 750;
+  font-weight: 900;
   text-align: center;
   line-height: 1.05;
   font-size: 13px;
-  color: rgba(255,255,255,0.95);
+  color: rgba(255,255,255,0.96);
+
+  background: rgba(0,0,0,0.22);
+  padding: calc(var(--px) * 3) calc(var(--px) * 2);
+  border: 1px solid rgba(255,255,255,0.12);
+  letter-spacing: 0.4px;
 }
 
 .spine-menu {
   position: absolute;
-  top: 8px; right: 8px;
+  top: calc(var(--px) * 3);
+  right: calc(var(--px) * 3);
   font-size: 12px;
-  opacity: 0.85;
+  opacity: 0.90;
 }
 
+/* ---- Canvas header ---- */
 .canvas-header {
   display: flex;
-  gap: 10px;
+  gap: calc(var(--px) * 4);
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: calc(var(--px) * 4);
 }
-.canvas-title { font-weight: 800; }
-.canvas-header-right { margin-left: auto; display: flex; gap: 8px; }
+.canvas-title { font-weight: 900; letter-spacing: 0.4px; }
+.canvas-header-right { margin-left: auto; display: flex; gap: calc(var(--px) * 3); }
 
+/* ---- Canvas frame (JRPG window) ---- */
 .stage-wrap {
   height: calc(100vh - 52px - 52px - 54px);
   overflow: hidden;
@@ -197,16 +277,20 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
       rgba(0,0,0,0) 2px,
       rgba(0,0,0,0) 6px
     ),
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.35));
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.40));
 
-  border: var(--pixel-border) solid rgba(255,255,255,0.14);
-  box-shadow: var(--pixel-shadow) var(--pixel-shadow) 0 rgba(0,0,0,0.75);
+  border: var(--border) solid var(--panel-edge);
+  box-shadow:
+    inset var(--border) var(--border) 0 rgba(255,255,255,0.10),
+    inset calc(var(--border) * -1) calc(var(--border) * -1) 0 rgba(0,0,0,0.65),
+    var(--shadow) var(--shadow) 0 rgba(0,0,0,0.80);
 
   touch-action: none;
 }
 
 .hint {
-  margin-top: 10px;
+  margin-top: calc(var(--px) * 4);
   color: var(--muted);
   font-size: 12px;
+  letter-spacing: 0.2px;
 }
