@@ -177,19 +177,27 @@ h1 {
 .plank::before {
   content: "";
   position: absolute;
-  left: calc(var(--border) * -1);
-  right: calc(var(--border) * -1);
-  top: calc(var(--px) * -6);
-  height: calc(var(--px) * 6);
+  left: 0;
+  right: 0;
+  top: calc(var(--px) * -4);
+  height: calc(var(--px) * 4);
 
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.10),
-    rgba(0,0,0,0.05)
-  );
-  border: var(--border) solid rgba(200,176,138,0.45);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 4px,
+      rgba(0,0,0,0) 4px,
+      rgba(0,0,0,0) 8px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      rgba(0,0,0,0.15)
+    );
+
+  border: var(--border) solid rgba(200,176,138,0.65);
 }
-
 
 /* ---- Book spines ---- */
 .spines {
