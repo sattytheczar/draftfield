@@ -1,9 +1,9 @@
-/* Idea Shelf — no build, iPhone-friendly
+/* draftfield — no build, iPhone-friendly
    Storage: IndexedDB (Dexie)
    Canvas: Konva
 */
 
-const db = new Dexie("idea_shelf_db");
+const db = new Dexie("draftfield_db");
 db.version(1).stores({
   books: "id,updatedAt,createdAt",
   nodes: "id,bookId,updatedAt",
@@ -256,7 +256,7 @@ function downloadJson(filename, obj) {
 
 async function exportBackup() {
   const backup = await buildBackupObject();
-  downloadJson(`idea-shelf-backup-${new Date().toISOString().slice(0,10)}.json`, backup);
+  downloadJson(`draftfield-backup-${new Date().toISOString().slice(0,10)}.json`, backup);
 
   // best-effort: treat as successful external backup
   await setSetting(SETTINGS_KEYS.lastExternalBackupAt, now());
@@ -445,28 +445,28 @@ function drawNode(node) {
   group.setAttr("ideaColor", node.color);
 
   const bubble = new Konva.Rect({
-    x: -80, y: -50,
-    width: 160, height: 100,
-    cornerRadius: 14,
-    fill: hexWithAlpha(node.color, 0.78),
-    shadowBlur: 14,
-    shadowOffset: { x: 0, y: 8 },
-    shadowColor: "rgba(0,0,0,0.45)"
-  });
+  x: -80, y: -50,
+  width: 160, height: 100,
+  cornerRadius: 0,
+  fill: hexWithAlpha(node.color, 0.70),
+  shadowBlur: 0,
+  shadowOffset: { x: 2, y: 2 },
+  shadowColor: "rgba(0,0,0,0.75)"
+});
 
-  const outline = new Konva.Rect({
-    x: -80, y: -50,
-    width: 160, height: 100,
-    cornerRadius: 14,
-    stroke: "rgba(255,255,255,0.0)",
-    strokeWidth: 2
-  });
+const outline = new Konva.Rect({
+  x: -80, y: -50,
+  width: 160, height: 100,
+  cornerRadius: 0,
+  stroke: "rgba(255,255,255,0.00)",
+  strokeWidth: 2
+});
 
-  const dot = new Konva.Circle({
-    x: 0, y: 0,
-    radius: APP.dotRadius,
-    fill: node.color
-  });
+ const dot = new Konva.Circle({
+  x: 0, y: 0,
+  radius: 4,
+  fill: node.color
+});
 
   const label = new Konva.Text({
     x: -70, y: -18,
