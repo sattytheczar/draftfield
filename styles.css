@@ -1,6 +1,5 @@
 :root {
-  --pixel-border: 2px;
-  --pixel-shadow: 2px;
+  
   --bg1: #07060a;
   --bg2: #120a18;
   --paper: #0f1116;
@@ -8,6 +7,11 @@
   --wood2: #140c08;
   --text: #f2f1f7;
   --muted: #b9b6c8;
+  --pixel-border: 2px;
+  --pixel-shadow: 2px;
+  --px: 2px;
+  --border: 2px;
+  --shadow: 2px;
 }
 
 * { box-sizing: border-box; }
