@@ -192,35 +192,41 @@ h1 {
   height: calc(var(--px) * 8);
 
   background:
+    /* break the barcode: faint diagonal dither */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0) 4px
+    ),
+    /* fine grain (small scale) */
     repeating-linear-gradient(
       90deg,
-      rgba(0,0,0,0.12) 0px,
-      rgba(0,0,0,0.12) 6px,
-      rgba(255,255,255,0.06) 6px,
-      rgba(255,255,255,0.06) 10px
+      rgba(0,0,0,0.10) 0px,
+      rgba(0,0,0,0.10) 2px,
+      rgba(255,255,255,0.04) 2px,
+      rgba(255,255,255,0.04) 4px
     ),
-    linear-gradient(
-      180deg,
-      #3a2416,
-      #2a190f
-    );
+    /* wide grain (bigger scale, but softer contrast) */
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.08) 0px,
+      rgba(0,0,0,0.08) 14px,
+      rgba(255,255,255,0.02) 14px,
+      rgba(255,255,255,0.02) 22px
+    ),
+    /* wood color */
+    linear-gradient(180deg, #3a2416, #2a190f);
 
-  border: var(--border) solid rgba(210,180,140,0.85);
+  /* fake outline + slight drop to separate from background */
+  box-shadow:
+    0 0 0 var(--border) rgba(210,180,140,0.85),
+    var(--shadow) var(--shadow) 0 rgba(0,0,0,0.35);
+
   clip-path: polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%);
 }
 
-
-/* connector lip: a dark seam right where top meets front */
-.plank::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: calc(var(--px) * 2);
-  background: rgba(0,0,0,0.35);
-  pointer-events: none;
-}
 
 /* ---- Book spines ---- */
 .spines {
