@@ -1,4 +1,6 @@
 :root {
+  --pixel-border: 2px;
+  --pixel-shadow: 2px;
   --bg1: #07060a;
   --bg2: #120a18;
   --paper: #0f1116;
@@ -13,12 +15,18 @@ html, body {
   margin: 0;
   height: 100%;
   background:
-    radial-gradient(900px 600px at 18% 18%, rgba(120, 60, 180, 0.18), rgba(0,0,0,0) 60%),
-    radial-gradient(900px 600px at 78% 30%, rgba(20, 120, 95, 0.14), rgba(0,0,0,0) 55%),
-    radial-gradient(1200px 900px at 50% 85%, rgba(180, 110, 40, 0.10), rgba(0,0,0,0) 65%),
-    linear-gradient(180deg, var(--bg1), #0b0b12 55%, #07060a);
-  color: var(--text);
-  font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      rgba(0,0,0,0.00) 2px,
+      rgba(0,0,0,0.00) 4px
+    ),
+    radial-gradient(800px 500px at 25% 20%, rgba(120, 60, 180, 0.22), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 600px at 75% 35%, rgba(20, 120, 95, 0.18), rgba(0,0,0,0) 55%),
+    linear-gradient(180deg, #05040a, #0a0812 55%, #05040a);
+  color: #f2f1f7;
+  font-family: ui-monospace, Menlo, Monaco, "Courier New", monospace;
   overscroll-behavior: none;
 }
 
@@ -51,7 +59,7 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   background: rgba(255,255,255,0.08);
   color: var(--text);
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: 0px !important;
   font-weight: 600;
 }
 .btn:active { transform: translateY(1px); }
@@ -85,7 +93,7 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 .shelf {
   position: relative;
   padding: 18px 12px 22px;
-  border-radius: 10px;
+  border-radius: 0px !important;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
   border: 1px solid rgba(255,255,255,0.08);
 }
@@ -94,52 +102,21 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
   position: absolute;
   left: 10px; right: 10px; bottom: 10px;
   height: 30px;
-  border-radius: 8px;
 
   background:
-    /* edge shading */
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.38)),
-
-    /* knots / irregular patches */
-    radial-gradient(22px 14px at 18% 55%, rgba(0,0,0,0.22), rgba(0,0,0,0) 70%),
-    radial-gradient(18px 12px at 42% 45%, rgba(255,255,255,0.05), rgba(0,0,0,0) 72%),
-    radial-gradient(26px 16px at 70% 60%, rgba(0,0,0,0.18), rgba(0,0,0,0) 75%),
-    radial-gradient(20px 12px at 86% 40%, rgba(255,255,255,0.04), rgba(0,0,0,0) 72%),
-
-    /* subtle diagonal grain (breaks the “barcode” look) */
-    repeating-linear-gradient(
-      -8deg,
-      rgba(0,0,0,0.10) 0px,
-      rgba(0,0,0,0.10) 10px,
-      rgba(255,255,255,0.025) 10px,
-      rgba(255,255,255,0.025) 18px
-    ),
-
-    /* softened long grain bands (less contrast, more organic) */
+    /* dark tile pattern */
     repeating-linear-gradient(
       90deg,
-      rgba(0,0,0,0.10) 0px,
-      rgba(0,0,0,0.10) 28px,
-      rgba(255,255,255,0.02) 28px,
-      rgba(255,255,255,0.02) 46px
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 6px,
+      rgba(0,0,0,0) 6px,
+      rgba(0,0,0,0) 12px
     ),
+    linear-gradient(180deg, #2a1a12, #140c08);
 
-    /* base wood tone */
-    linear-gradient(180deg, #2b1b12, #140c08);
-
-  box-shadow: 0 12px 20px rgba(0,0,0,0.65);
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.plank::after {
-  content: "";
-  position: absolute;
-  left: 6px; right: 6px; bottom: -6px;
-  height: 10px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.55));
-  filter: blur(0.2px);
-  opacity: 0.85;}
+  border: var(--pixel-border) solid rgba(255,255,255,0.14);
+  box-shadow:
+    var(--pixel-shadow) var(--pixel-shadow) 0 rgba(0,0,0,0.70);
 }
 
 .spines {
@@ -154,46 +131,28 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 .spine {
   width: 56px;
   height: 190px;
-  border-radius: 6px;
   position: relative;
   flex: 0 0 auto;
-  box-shadow: 0 12px 18px rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 10px;
-  user-select: none;
 
-  /* add subtle vertical “cloth/paper” texture */
-  background-blend-mode: overlay;
+  border: var(--pixel-border) solid rgba(255,255,255,0.16);
+  box-shadow: var(--pixel-shadow) var(--pixel-shadow) 0 rgba(0,0,0,0.70);
 }
 
-/* dark groove near the spine edge */
 .spine::before {
   content: "";
   position: absolute;
-  left: 6px; top: 8px; bottom: 8px;
-  width: 8px;
-  border-radius: 6px;
-  background: rgba(0,0,0,0.22);
+  inset: 6px;
+  border: 1px solid rgba(0,0,0,0.35);
+  pointer-events: none;
 }
 
-/* sheen highlight */
-.spine::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 6px;
-
-  background:
-    /* worn edges */
-    linear-gradient(90deg, rgba(255,255,255,0.16), rgba(255,255,255,0.00) 26%),
-    linear-gradient(-90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.00) 32%),
-    /* faint mottling */
-    radial-gradient(120px 180px at 40% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0) 60%);
-  pointer-events: none;
-  opacity: 0.75;
+.spine-title {
+  background: rgba(0,0,0,0.25);
+  padding: 6px 4px;
+  border: 1px solid rgba(255,255,255,0.12);
+  letter-spacing: 0.2px;
+  font-weight: 800;
 }
 
 .spine-title {
@@ -224,21 +183,20 @@ h1 { margin: 8px 0 10px; font-size: 22px; }
 
 .stage-wrap {
   height: calc(100vh - 52px - 52px - 54px);
-  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
 
-  /* Paper-ish background + faint texture */
   background:
-    radial-gradient(900px 600px at 40% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0.45)),
     repeating-linear-gradient(
       0deg,
       rgba(255,255,255,0.02) 0px,
       rgba(255,255,255,0.02) 2px,
-      rgba(0,0,0,0.00) 2px,
-      rgba(0,0,0,0.00) 6px
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0) 6px
     ),
-    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.20));
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.35));
+
+  border: var(--pixel-border) solid rgba(255,255,255,0.14);
+  box-shadow: var(--pixel-shadow) var(--pixel-shadow) 0 rgba(0,0,0,0.75);
 
   touch-action: none;
 }
