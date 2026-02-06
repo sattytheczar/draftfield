@@ -167,28 +167,29 @@ h1 {
   left: calc(var(--px) * 5);
   right: calc(var(--px) * 5);
   bottom: calc(var(--px) * 5);
-  height: calc(var(--px) * 14);
+  height: calc(var(--px) * 12);
 
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.04) 0px,
-      rgba(255,255,255,0.04) 2px,
-      rgba(0,0,0,0) 2px,
-      rgba(0,0,0,0) 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,0,0,0.16) 0px,
-      rgba(0,0,0,0.16) calc(var(--px) * 10),
-      rgba(255,255,255,0.03) calc(var(--px) * 10),
-      rgba(255,255,255,0.03) calc(var(--px) * 16)
-    ),
-    linear-gradient(180deg, #2a190f, #140c08);
-
-  border: var(--border) solid rgba(200, 176, 138, 0.55);
+  background: linear-gradient(180deg, #2a190f, #140c08);
+  border: var(--border) solid rgba(200,176,138,0.55);
   box-shadow: var(--shadow) var(--shadow) 0 rgba(0,0,0,0.80);
 }
+
+.plank::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--border) * -1);
+  right: calc(var(--border) * -1);
+  top: calc(var(--px) * -6);
+  height: calc(var(--px) * 6);
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.10),
+    rgba(0,0,0,0.05)
+  );
+  border: var(--border) solid rgba(200,176,138,0.45);
+}
+
 
 /* ---- Book spines ---- */
 .spines {
@@ -217,6 +218,23 @@ h1 {
   inset: calc(var(--px) * 3);
   border: 1px solid rgba(0,0,0,0.45);
   pointer-events: none;
+}
+
+.spine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      rgba(0,0,0,0.15) 45%,
+      rgba(0,0,0,0.30)
+    );
+
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .spine::after {
