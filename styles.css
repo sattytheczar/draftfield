@@ -205,7 +205,7 @@ h1 {
   border: var(--border) solid rgba(200,176,138,0.65);
 
   /* key: trapezoid shape to stop “UI layer rectangle” feel */
-  clip-path: polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
 }
 
 /* connector lip: a dark seam right where top meets front */
